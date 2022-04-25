@@ -1,0 +1,62 @@
+public string NumberToText(int sayi)
+        {
+            string metin = "";
+
+            if (sayi == 0)
+            {
+                metin += "Sıfır";
+                return metin;
+            }
+
+            if (sayi < 0)
+            {
+                metin += "- " + NumberToText(Math.Abs(sayi));
+                return metin;
+            }
+
+            if (sayi > 999)
+            {
+                int kalan = sayi / 1000;
+                if (kalan == 1 || kalan == 0)
+                {
+                    metin += " Bin ";
+                    sayi %= 1000;
+                }
+                else
+                {
+                    metin += $" {NumberToText(kalan)} Bin ";
+                    sayi %= 1000;
+                }
+            }
+            if (sayi > 99)
+            {
+                int kalan = sayi / 100;
+                if (kalan == 1 || kalan == 0)
+                {
+                    metin += " Yüz ";
+                    sayi %= 100;
+                }
+                else
+                {
+                    metin += $" {NumberToText(kalan)} Yüz ";
+                    sayi %= 100;
+                }
+            }
+            if (sayi > 0)
+            {
+                string[] sayilar = new string[] {"Sıfır", "Bir", "İki", "Üç", "Dört", "Beş", "Altı", "Yedi", "Sekiz", "Dokuz", "On", "On bir", "On iki", "On üç", "On dört", "On beş", "On altı", "On yedi", "On sekiz", "On dokuz"};
+                string[] onluklar = new string[] {"Sıfır", "On", "Yirmi", "Otuz", "Kırk", "Elli", "Altmış", "Yetmiş", "Seksen", "Doksan" };
+                if (sayi < 20)
+                {
+                    metin += sayilar[sayi];
+                }
+                else
+                {
+                    metin += onluklar[sayi/ 10];
+                    if ((sayi % 10) > 0)
+                        metin += " " + sayilar[sayi % 10];
+                }
+            }
+            
+            return metin;
+        }
